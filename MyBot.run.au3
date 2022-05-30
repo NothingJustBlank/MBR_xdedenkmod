@@ -729,14 +729,6 @@ Func runBot() ;Bot that runs everything in order
 
 	Collect(False)
 
-	If $g_abDonateOnly[$g_iCurAccount] Then
-		SetLog("Donate Only Mode!", $COLOR_INFO)
-		DonateOnly()
-	Else
-		SetLog("Request Only Mode!", $COLOR_INFO)
-		RequestOnly()
-	EndIf
-
 	;Common Routine Reset
 	If Not $g_SkipCommonRoutine Then
 		If $g_LastCommonRoutine = "" Then
@@ -748,6 +740,8 @@ Func runBot() ;Bot that runs everything in order
 			$g_DoCommonRoutine = False
 		EndIf
 	EndIf
+	
+	CommonRoutine()
 	
 	CheckSwitchAcc()
 EndFunc   ;==>runBot
@@ -1123,23 +1117,6 @@ Func __RunFunction($action)
 	EndSwitch
 	SetDebugLog("_RunFunction: " & $action & " END", $COLOR_DEBUG2)
 EndFunc   ;==>__RunFunction
-
-Func DonateOnly()
-	; First Round
-	Local $FuncList = ['BoostSuperTroop', 'DonateCC,Train']
-	For $Index In $FuncList
-				If Not $g_bRunState Then Return
-				_RunFunction($Index)
-				If _Sleep(500) Then Return
-				If $g_bRestart Then Return
-	Next
-	CommonRoutine()
-EndFunc
-
-Func RequestOnly()
-	CommonRoutine()
-	Return
-EndFunc
 
 Func CommonRoutine()
 	If Not $g_DoCommonRoutine Then Return

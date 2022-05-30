@@ -230,6 +230,7 @@ Func CheckSwitchAcc()
 					RequestCC()
 					
 					If $g_abDonateOnly[$g_iCurAccount] Then
+						SetLog("Donate only mode!", $COLOR_INFO)
 						PrepareDonateCC()
 						DonateCC()
 						TrainSystem()
