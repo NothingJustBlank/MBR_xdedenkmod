@@ -1,0 +1,54 @@
+;TH13 Bikin Dragon 12, Balon 12
+;TH12 Bikin Dragon 11, Balon 12
+;Spell Rage 3, Bat 5, CC : StoneS-Balon-Rage
+
+      |___________|___________|____TH06___|____TH07___|____TH08___|____TH09___|____TH10___|____TH11___|____TH12___|____TH13___|____TH14___|
+REDLN |0          |0          |0          |0          |0          |0          |0          |4          |4          |4          |4          |
+DRPLN |0          |0          |0          |0          |0          |0          |0          |0          |0          |0          |0          |
+      |                                                                                                                                   |
+      |___________|___________|____TH06___|____TH07___|____TH08___|____TH09___|____TH10___|____TH11___|____TH12___|____TH13___|____TH14___|
+CCREQ |           |           |           |           |           |           |           |Ball   Rage|Ball   Rage|Ball   Rage|Ball   BatS|
+      |                                                                                                                                   |
+      |EXTR. GOLD |EXTR.ELIXIR|EXTR. DARK |DEPO. GOLD |DEPO.ELIXIR|DEPO. DARK |TOWNHALL   |FORCED SIDE|___________|___________|___________|
+SIDE  |0          |0          |0          |0          |0          |0          |20         |           |           |           |           |
+      |EAGLE      |INFERNO    |XBOW       |WIZTOWER   |MORTAR     |AIRDEFENSE |GEMBOX     |GEMBOX     |           |           |           |
+SIDEB |9          |5          |0          |0          |0          |0          |0          |           |           |           |           |
+      |                                                                                                                       |           |
+      |VECTOR_____|SIDE_______|DROP_POINTS|ADDTILES___|VERSUS_____|RANDOMX_PX_|RANDOMY_PX_|BUILDING___|___________|___________|___________|
+MAKE  |A          |FRONT-LEFT |10         |0          |EXT-INT    |0          |0          |           |           |           |           |
+MAKE  |B          |FRONT-RIGHT|10         |0          |INT-EXT    |0          |0          |           |           |           |           |
+MAKE  |V          |FRONT-RIGHT|10         |0          |EXT-INT    |0          |0          |           |           |           |           |
+MAKE  |K          |FRONT-LEFT |10         |0          |INT-EXT    |0          |0          |           |           |           |           |
+MAKE  |C          |FRONT-LEFT |10         |-10        |INT-EXT    |0          |0          |           |           |           |           |
+MAKE  |D          |FRONT-RIGHT|10         |-10        |INT-EXT    |0          |0          |           |           |           |           |
+MAKE  |E          |FRONT-LEFT |10         |-16        |INT-EXT    |0          |0          |           |           |           |           |
+MAKE  |F          |FRONT-RIGHT|10         |-16        |INT-EXT    |0          |0          |           |           |           |           |
+MAKE  |H          |FRONT-RIGHT|10         |-23        |INT-EXT    |0          |0          |           |           |           |           |
+MAKE  |M          |LEFT-FRONT |10         |0          |EXT-INT    |0          |0          |           |           |           |           |
+MAKE  |N          |RIGHT-FRONT|10         |0          |EXT-INT    |0          |0          |           |           |           |           |
+      |                                                                                                                       |           |
+      |VECTOR_____|INDEX______|QTY_X_VECT_|TROOPNAME__|DELAY_DROP_|DELAYCHANGE|SLEEPAFTER_|___________|___________|___________|___________|
+DROP  |B          |8,10       |2          |Ball       |50-70      |27-50      |15-20      |           |           |           |           |
+WAIT  |2000-4000  |           |           |           |           |           |           |           |           |           |           |
+DROP  |B          |7,9        |2          |Drag       |50-70      |37-50      |500-700    |           |           |           |           |
+DROP  |A          |2          |1          |StoneS     |0          |50-70      |150-170    |           |           |           |           |
+DROP  |A          |2          |1          |Castle     |0          |50-70      |150-170    |           |           |           |           |
+DROP  |A          |1          |1          |KING       |0          |0          |450-600    |           |           |           |           |
+WAIT  |500-1000   |           |           |           |           |           |           |           |           |           |           |
+DROP  |A          |3          |1          |QUEEN      |0          |0          |150-200    |           |           |           |           |
+WAIT  |5000-6000  |           |           |           |           |           |           |           |           |           |           |
+DROP  |A          |6,7,8,9,10 |5          |Ball       |50-70      |27-50      |15-20      |           |           |           |           |
+DROP  |B          |1,2,3,4,5,6|6          |Ball       |50-70      |27-50      |90-110     |           |           |           |           |
+DROP  |A          |10         |1          |Warden     |50-70      |0          |100-350    |           |           |           |           |
+DROP  |A          |6,7,8,9,10 |5          |Drag       |50-70      |37-50      |15-20      |           |           |           |           |
+DROP  |B          |1,2,3,4,5  |5          |Drag       |50-70      |37-50      |500-700    |           |           |           |           |
+DROP  |C          |2          |1          |RSpell     |0          |0          |530-550    |           |           |           |           |
+DROP  |D          |3          |1          |RSpell     |0          |0          |530-550    |           |           |           |           |
+DROP  |A          |10,9,8     |3          |Drag       |50-70      |37-50      |15-20      |           |           |           |           |
+DROP  |A          |1          |1          |CHAMPION   |0          |0          |150-300    |           |           |           |           |
+WAIT  |2000-3000  |           |           |           |           |           |           |           |           |           |           |
+DROP  |E          |2          |1          |RSpell     |0          |0          |150-170    |           |           |           |           |
+DROP  |F          |4          |1          |RSpell     |0          |0          |150-170    |           |           |           |           |
+WAIT  |2000-3500  |           |           |           |           |           |           |           |           |           |           |
+DROP  |E          |1          |7          |BtSpell    |50-70      |37-50      |15-20      |           |           |           |           |
+DROP  |A          |10         |1          |Warden     |50-70      |0          |500-650    |           |           |           |           |

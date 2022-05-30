@@ -1,0 +1,47 @@
+      |EXTR. GOLD |EXTR.ELIXIR|EXTR. DARK |DEPO. GOLD |DEPO.ELIXIR|DEPO. DARK |TOWNHALL   |FORCED SIDE|___________|___________|___________|
+SIDE  |5          |5          |0          |0          |0          |0          |20         |           |           |           |           |
+      |EAGLE      |INFERNO    |XBOW       |WIZTOWER   |MORTAR     |AIRDEFENSE |GEMBOX     |GEMBOX     |           |           |           |
+SIDEB |0          |0          |0          |0          |0          |0          |0          |           |           |           |           |
+      |                                                                                                                       |           |
+      |VECTOR_____|SIDE_______|DROP_POINTS|ADDTILES___|VERSUS_____|RANDOMX_PX_|RANDOMY_PX_|BUILDING___|___________|___________|___________|
+MAKE  |A          |FRONT-LEFT |10         |0          |INT-EXT    |0          |0          |           |           |           |           |;main troops
+MAKE  |B          |FRONT-RIGHT|10         |0          |INT-EXT    |0          |0          |           |           |           |           |;main troops
+MAKE  |C          |FRONT-LEFT |10         |-10        |INT-EXT    |0          |0          |           |           |           |           |;rage spell
+MAKE  |D          |FRONT-RIGHT|10         |-15        |INT-EXT    |0          |0          |           |           |           |           |;rage spell
+
+MAKE  |E          |LEFT-FRONT |10         |0          |EXT-INT    |0          |0          |           |           |           |           |;side sbarb first
+MAKE  |F          |RIGHT-FRONT|10         |0          |EXT-INT    |0          |0          |           |           |           |           |;side sbarb first
+
+MAKE  |G          |FRONT-LEFT |10         |-18        |INT-EXT    |0          |0          |           |           |           |           |
+MAKE  |H          |FRONT-RIGHT|10         |-18        |INT-EXT    |0          |0          |           |           |           |           |
+
+MAKE  |M          |LEFT-FRONT |10         |0          |EXT-INT    |0          |0          |           |           |           |           |
+MAKE  |N          |RIGHT-FRONT|10         |0          |EXT-INT    |0          |0          |           |           |           |           |
+      |                                                                                                                       |           |
+      |VECTOR_____|INDEX______|QTY_X_VECT_|TROOPNAME__|DELAY_DROP_|DELAYCHANGE|SLEEPAFTER_|___________|___________|___________|___________|
+DROP  |E          |5,6,7      |3          |Sbarb      |50-70      |27-50      |15-20      |           |           |           |           |
+DROP  |F          |5,6,7      |3          |Sbarb      |50-70      |27-50      |15-20      |           |           |           |           |
+DROP  |A-B        |10,9,8     |3          |Sbarb      |50-70      |27-50      |90-110     |           |           |           |           |
+WAIT  |2000-3000  |           |           |           |           |           |           |           |           |           |           |
+DROP  |A-B        |8,7,6      |3          |Sbarb      |50-70      |27-50      |90-110     |           |           |           |           |
+DROP  |A          |1          |1          |WallW      |50-70      |27-50      |90-110     |           |           |           |           |
+DROP  |A          |1          |1          |Castle     |0          |50-70      |150-170    |           |           |           |           |
+DROP  |A          |5          |1          |KING       |0          |0          |450-600    |           |           |           |           |
+DROP  |A          |1          |1          |Warden     |50-70      |0          |300-450    |           |           |           |           |
+DROP  |A          |5          |1          |QUEEN      |0          |0          |150-200    |           |           |           |           |
+WAIT  |1000 -2000 |           |           |           |           |           |           |           |           |           |           |
+DROP  |A-B        |1-5        |10         |Sbarb      |50-70      |27-50      |15-20      |           |           |           |           |
+DROP  |A-B        |1-5        |10         |Sbarb      |50-70      |27-50      |15-20      |           |           |           |           |
+DROP  |A-B        |1-5        |10         |Sbarb      |50-70      |27-50      |15-20      |           |           |           |           |
+DROP  |A-B        |1-5        |10         |Sbarb      |50-70      |27-50      |15-20      |           |           |           |           |
+DROP  |A          |1          |1          |Warden     |50-70      |0          |300-450    |           |           |           |           |
+DROP  |C          |3          |1          |RSpell     |0          |0          |330-450    |           |           |           |           |
+WAIT  |1500-2500  |           |           |           |           |           |           |           |           |           |           |
+DROP  |D          |1          |1          |RSpell     |0          |0          |530-550    |           |           |           |           |
+DROP  |F          |1          |1          |CHAMPION   |0          |0          |150-300    |           |           |           |           |
+DROP  |Z          |1          |1          |FSpell     |0          |0          |190-230    |           |           |           |           |
+WAIT  |3000-4000  |           |           |           |           |           |           |           |           |           |           |
+DROP  |G          |3          |1          |RSpell     |0          |0          |150-170    |           |           |           |           |
+DROP  |P          |1          |1          |FSpell     |0          |0          |190-230    |           |           |           |           |
+WAIT  |5500-7000  |           |           |           |           |           |           |           |           |           |           |
+DROP  |A          |10         |1          |Warden     |50-70      |0          |500-650    |           |           |           |           |
