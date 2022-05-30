@@ -1966,3 +1966,9 @@ Global $g_bChkEnableCollectCCGold = False, $g_bChkEnableForgeGold = False, $g_bC
 Global $g_bChkEnableForgeDE = False, $g_bChkEnableForgeBBGold = False, $g_bChkEnableForgeBBElix = False, $g_iCmbForgeBuilder = 0
 Global $aCCBuildingIgnore[9] = ["Grove", "Tree", "Forest", "Campsite", "Stone Circle", "Stone", "Pillar", "Forest Circle", "The First"]
 Global $g_bChkStartWeekendRaid = True
+
+;xdedenkmod
+Global $g_iRequestTime = 10 ;in minutes
+Global $g_LastCommonRoutine ;time to last common routine
+Global $g_DoCommonRoutine = False
+Global $g_SkipCommonRoutine = True

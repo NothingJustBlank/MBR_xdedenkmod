@@ -100,7 +100,7 @@ Global $g_bBotDockedShrinked = False ; Bot is shrinked or not when docked
 Global $hImageList = 0
 Global $g_hFrmBotButtons, $g_hFrmBotLogoUrlSmall, $g_hFrmBotEx = 0, $g_hLblBotTitle, $g_hLblBotShrink = 0, $g_hLblBotExpand = 0, $g_hLblBotMinimize = 0, $g_hLblBotClose = 0, $g_hFrmBotBottom = 0
 Global $g_hFrmBotEmbeddedShield = 0, $g_hFrmBotEmbeddedShieldInput = 0, $g_hFrmBotEmbeddedGraphics = 0
-Global $g_hFrmBot_MAIN_PIC = 0, $g_hFrmBot_URL_PIC = 0, $g_hFrmBot_URL_PIC2 = 0, $g_hFrmBot_lbl_Mod = 0
+Global $g_hFrmBot_MAIN_PIC = 0, $g_hFrmBot_URL_PIC = 0, $g_hFrmBot_URL_PIC2 = 0, $g_hFrmBot_lbl_Mod = 0, $g_hFrmBot_lbl_Mod1 = 0
 Global $g_hTabMain = 0, $g_hTabLog = 0, $g_hTabVillage = 0, $g_hTabAttack = 0, $g_hTabBot = 0, $g_hTabAbout = 0
 Global $g_hStatusBar = 0
 Global $g_hTiShow = 0, $g_hTiHide = 0, $g_hTiDonate = 0, $g_hTiAbout = 0, $g_hTiStartStop = 0, $g_hTiPause = 0, $g_hTiExit = 0
@@ -288,9 +288,14 @@ Func CreateMainGUIControls()
 	GUICtrlSetOnEvent(-1, "BotMoveRequest")
 	GUICtrlSetState(-1, $GUI_DISABLE)
 	
-	$g_hFrmBot_lbl_Mod = GUICtrlCreateLabel("xbebenkMod_" & $g_sXModversion & " ", $_GUI_MAIN_WIDTH - 135, 15, 135 , 20 ,$SS_RIGHT)
+	$g_hFrmBot_lbl_Mod = GUICtrlCreateLabel("xbebenkMod_" & $g_sXModversion & " ", $_GUI_MAIN_WIDTH - 180, 15, 180 , 20 ,$SS_RIGHT)
 	GUICtrlSetBkColor(-1, $GUI_BKCOLOR_TRANSPARENT)
 	GUICtrlSetColor(-1, $COLOR_INFO)
+	GUICtrlSetFont (-1,9, 800)
+	GUICtrlSetState($g_hFrmBot_MAIN_PIC, $GUI_ENABLE)
+	$g_hFrmBot_lbl_Mod1 = GUICtrlCreateLabel("xdedenkMod_" & $g_sXModversion1 & " ", 5, 20, 135 , 20 ,$SS_LEFT)
+	GUICtrlSetBkColor(-1, $GUI_BKCOLOR_TRANSPARENT)
+	GUICtrlSetColor(-1, $COLOR_ERROR)
 	GUICtrlSetFont (-1,9, 800)
 	GUICtrlSetState($g_hFrmBot_MAIN_PIC, $GUI_ENABLE)
 

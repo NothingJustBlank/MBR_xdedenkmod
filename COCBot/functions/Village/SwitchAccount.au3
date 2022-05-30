@@ -96,6 +96,7 @@ Func CheckSwitchAcc()
 	Local $aActibePBTaccounts = _ArrayFindAll($g_abPBActive, True)
 
 	SetLog("Start Switch Account!", $COLOR_INFO)
+	
 	; Force switch if no clangames event active
 	If $g_bForceSwitchifNoCGEvent Then $bForceSwitch = True
 	
@@ -141,6 +142,9 @@ Func CheckSwitchAcc()
 			$bForceSwitch = True
 		EndIf
 	EndIf
+	
+	; xdedenk will always force switch
+	$bForceSwitch = True
 
 	Local $sLogSkip = ""
 	If Not $g_abDonateOnly[$g_iCurAccount] And $iWaitTime <= $g_iTrainTimeToSkip And Not $bForceSwitch Then
@@ -221,12 +225,15 @@ Func CheckSwitchAcc()
 					TrainSystem()
 				EndIf
 			Else
-				If $g_bRequestTroopsEnable Then
-					SetLog("Try RequestCC, Donate And Train before switching account", $COLOR_DEBUG)
-					RequestCC(False)
-					PrepareDonateCC()
-					DonateCC()
-					TrainSystem()
+				If $g_bRequestTroopsEnable Then ;Editted for xdedenkmod
+					SetLog("Requesting CC Only", $COLOR_DEBUG)
+					RequestCC()
+					
+					If $g_abDonateOnly[$g_iCurAccount] Then
+						PrepareDonateCC()
+						DonateCC()
+						TrainSystem()
+					EndIf
 				EndIf
 			EndIf
 			If Not $g_bForceSwitchifNoCGEvent Then _ClanGames(False, $g_bChkForceBBAttackOnClanGames, True)
@@ -239,10 +246,12 @@ Func CheckSwitchAcc()
 	EndIf
 	If Not $g_bRunState Then Return
 
-	$g_bForceSwitch = false ; reset the need to switch
+	$g_bForceSwitch = False ; reset the need to switch
 EndFunc   ;==>CheckSwitchAcc
 
 Func SwitchCOCAcc($NextAccount)
+	Local $tmp_CurrAcc = $g_iCurAccount ;xdedenkmod
+
 	Local $abAccountNo = AccountNoActive()
 	If $NextAccount < 0 And $NextAccount > $g_iTotalAcc Then $NextAccount = _ArraySearch(True, $abAccountNo)
 	Static $iRetry = 0
@@ -360,6 +369,20 @@ Func SwitchCOCAcc($NextAccount)
 				LoadProfile(False)
 			EndIf
 		EndIf
+		
+		;xdedenkmod - Delay for switch
+		If Not $g_ahTimerSinceSwitched[$NextAccount] = "" Then
+			Local $tmp_TimerDiff = _Timer_Diff($g_ahTimerSinceSwitched[$NextAccount])
+			If $tmp_TimerDiff >= ($g_iRequestTime * 60000) Then
+				SetLog("Switching to next account, last login is > " & $g_iRequestTime & " minutes!", $COLOR_SUCCESS)
+			Else
+				Local $Ran_Time = Random(1, 1.1)
+				Local $Ran_Wait = $Ran_Time * $tmp_TimerDiff
+				SetLog("Waiting for CC Request to be ready, Sleep for " & $Ran_Wait & "ms!", $COLOR_INFO)
+				If _Sleep($Ran_Wait) Then Return
+			EndIf
+		EndIf
+		
 		If $bSharedPrefs Then
 			SetLog("Please wait for loading CoC")
 			;PushSharedPrefs()
