@@ -1969,4 +1969,6 @@ Global $g_bChkStartWeekendRaid = True
 
 ;xdedenkmod
 Global $g_iRequestTime = 10 ;in minutes
-Global $g_LastAccLogin[16]
+Global $g_LastCommonRoutine ;time to last common routine
+Global $g_DoCommonRoutine = False
+Global $g_SkipCommonRoutine = True
