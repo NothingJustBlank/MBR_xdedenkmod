@@ -72,6 +72,7 @@ Func CreateLogFile()
 	SetDebugLog("@OSServicePack: " & @OSServicePack)
 	SetDebugLog("@AutoItVersion: " & @AutoItVersion)
 	SetDebugLog("xbebenkMod Version: " & $g_sXModversion)
+	SetDebugLog("xdedenkMod Version: " & $g_sXModversion1)
 	SetDebugLog("Primary Display: " & @DesktopWidth & " x " & @DesktopHeight & " - " & @DesktopDepth & "bit")
 
 	FlushGuiLog($g_hTxtLog, $g_oTxtLogInitText)

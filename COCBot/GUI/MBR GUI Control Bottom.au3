@@ -25,6 +25,7 @@ Func Initiate()
 		SetLog($Compiled & " running on " & @OSVersion & " " & @OSServicePack & " " & @OSArch)
 		SetLog("AutoIt Version : " & @AutoItVersion)
 		SetLog("xbebenkMod Version : " & $g_sXModversion, $COLOR_INFO)
+		SetLog("xdedenkMod Version: " & $g_sXModversion1, $COLOR_INFO)
 		If Not $g_bSearchMode Then
 			SetLogCentered(" Bot Start ", Default, $COLOR_SUCCESS)
 		Else

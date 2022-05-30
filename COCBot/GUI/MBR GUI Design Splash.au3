@@ -16,7 +16,7 @@
 #include <Sound.au3>
 
 ; Splash Variables
-Global $g_hSplash = 0, $g_hSplashProgress, $g_lSplashStatus, $g_lSplashPic, $g_lSplashTitle, $g_hSplashlbl_Mod
+Global $g_hSplash = 0, $g_hSplashProgress, $g_lSplashStatus, $g_lSplashPic, $g_lSplashTitle, $g_hSplashlbl_Mod, $g_hSplashlbl_Mod1
 Global $g_iSplashTotalSteps = Default
 Global $g_iSplashCurrentStep = 0
 Global $g_hSplashTimer = 0
@@ -85,7 +85,13 @@ Func CreateSplashScreen($iSteps = Default)
 		GUICtrlSetOnEvent(-1, "MoveSplashScreen")
 		GUICtrlSetState(-1, $GUI_DISABLE)
 	
-		$g_hSplashlbl_Mod = GUICtrlCreateLabel("xbebenkMod_" & $g_sXModversion & " ", $iX - 135, 0, 135 , 20 ,$SS_RIGHT)
+		$g_hSplashlbl_Mod = GUICtrlCreateLabel("xbebenkMod_" & $g_sXModversion & " ", $iX - 180, 0, 180 , 20 ,$SS_RIGHT)
+		GUICtrlSetBkColor(-1, $GUI_BKCOLOR_TRANSPARENT)
+		GUICtrlSetColor(-1, $COLOR_INFO)
+		GUICtrlSetFont (-1,9, 800)
+		GUICtrlSetState($g_lSplashPic, $GUI_ENABLE)
+		
+		$g_hSplashlbl_Mod1 = GUICtrlCreateLabel("xdedenkMod_" & $g_sXModversion1 & " ", 5, 0, 135 , 20 ,$SS_Left)
 		GUICtrlSetBkColor(-1, $GUI_BKCOLOR_TRANSPARENT)
 		GUICtrlSetColor(-1, $COLOR_INFO)
 		GUICtrlSetFont (-1,9, 800)
