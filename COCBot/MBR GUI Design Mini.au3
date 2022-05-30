@@ -295,7 +295,7 @@ Func CreateMainGUIControls()
 	GUICtrlSetState($g_hFrmBot_MAIN_PIC, $GUI_ENABLE)
 	$g_hFrmBot_lbl_Mod1 = GUICtrlCreateLabel("xdedenkMod_" & $g_sXModversion1 & " ", 5, 20, 135 , 20 ,$SS_LEFT)
 	GUICtrlSetBkColor(-1, $GUI_BKCOLOR_TRANSPARENT)
-	GUICtrlSetColor(-1, $COLOR_INFO)
+	GUICtrlSetColor(-1, $COLOR_ERROR)
 	GUICtrlSetFont (-1,9, 800)
 	GUICtrlSetState($g_hFrmBot_MAIN_PIC, $GUI_ENABLE)
 

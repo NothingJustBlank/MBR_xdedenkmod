@@ -93,7 +93,7 @@ Func CreateSplashScreen($iSteps = Default)
 		
 		$g_hSplashlbl_Mod1 = GUICtrlCreateLabel("xdedenkMod_" & $g_sXModversion1 & " ", 5, 0, 135 , 20 ,$SS_Left)
 		GUICtrlSetBkColor(-1, $GUI_BKCOLOR_TRANSPARENT)
-		GUICtrlSetColor(-1, $COLOR_INFO)
+		GUICtrlSetColor(-1, $COLOR_ERROR)
 		GUICtrlSetFont (-1,9, 800)
 		GUICtrlSetState($g_lSplashPic, $GUI_ENABLE)
 		
