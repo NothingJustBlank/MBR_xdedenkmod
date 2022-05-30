@@ -730,8 +730,10 @@ Func runBot() ;Bot that runs everything in order
 	Collect(False)
 
 	If $g_abDonateOnly[$g_iCurAccount] Then
+		SetLog("Donate Only Mode!", $COLOR_INFO)
 		DonateOnly()
 	Else
+		SetLog("Request Only Mode!", $COLOR_INFO)
 		RequestOnly()
 	EndIf
 
