@@ -222,7 +222,16 @@ Func CheckSwitchAcc()
 				If $g_bForceSwitchifNoCGEvent Then
 					PrepareDonateCC()
 					DonateCC()
+					
+					If _Sleep(500) Then Return
+					DonateCC() ;second time to go
+					
 					TrainSystem()
+					
+					;Reset Dono Variables
+					$g_NoDonoTroops = False
+					$g_NoDonoSpells = False
+					$g_NoDonoSieges = False
 				EndIf
 			Else
 				If $g_bRequestTroopsEnable Then ;Editted for xdedenkmod

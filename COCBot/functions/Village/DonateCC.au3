@@ -400,8 +400,11 @@ Func DonateCC($bCheckForNewMsg = False)
 			If $g_iTotalDonateTroopCapacity <= 0 Then
 				SetLog("Clan Castle troops are full, skip troop donation", $COLOR_ACTION)
 				$g_bSkipDonTroops = True
+			ElseIf $g_NoDonoTroops Then
+				SetLog("No available troops!", $COLOR_ACTION)
+				$g_bSkipDonTroops = True
 			EndIf
-			If $g_iCurrentSpells = 0 And $g_iCurrentSpells <> "" Then
+			If ($g_iCurrentSpells = 0 And $g_iCurrentSpells <> "") Or $g_NoDonoSpells Then
 				SetLog("No spells available, skip spell donation...", $COLOR_ORANGE)
 				$g_bSkipDonSpells = True
 			ElseIf $g_iTotalDonateSpellCapacity = 0 Then
@@ -415,7 +418,7 @@ Func DonateCC($bCheckForNewMsg = False)
 			If Not $bDonateSiege And Not $bDonateAllSiege Then
 				SetLog("Siege donation is not enabled, skip siege donation", $COLOR_ACTION)
 				$g_bSkipDonSiege = True
-			ElseIf $g_aiCurrentSiegeMachines[$eSiegeWallWrecker] = 0 And $g_aiCurrentSiegeMachines[$eSiegeBattleBlimp] = 0 And $g_aiCurrentSiegeMachines[$eSiegeStoneSlammer] = 0 And $g_aiCurrentSiegeMachines[$eSiegeBarracks] = 0 And $g_aiCurrentSiegeMachines[$eSiegeLogLauncher] = 0 Then
+			ElseIf ($g_aiCurrentSiegeMachines[$eSiegeWallWrecker] = 0 And $g_aiCurrentSiegeMachines[$eSiegeBattleBlimp] = 0 And $g_aiCurrentSiegeMachines[$eSiegeStoneSlammer] = 0 And $g_aiCurrentSiegeMachines[$eSiegeBarracks] = 0 And $g_aiCurrentSiegeMachines[$eSiegeLogLauncher] = 0) Or $g_NoDonoSieges Then
 				SetLog("No siege machines available, skip siege donation", $COLOR_ORANGE)
 				$g_bSkipDonSiege = True
 			ElseIf $g_iTotalDonateSiegeMachineCapacity = -1 Then
@@ -798,6 +801,7 @@ Func DonateTroopType(Const $iTroopIndex, $Quant = 0, Const $bDonateQueueOnly = F
 	; figure out row/position
 	If $Slot < 0 Or $Slot > 13 Then
 		SetLog("Invalid slot # found = " & $Slot & " for " & $g_asTroopNames[$iTroopIndex], $COLOR_ERROR)
+		$g_NoDonoTroops = True
 		Return
 	EndIf
 	SetDebugLog("slot found = " & $Slot & ", " & $g_asTroopNames[$iTroopIndex], $COLOR_DEBUG)
@@ -927,6 +931,7 @@ Func DonateSpellType(Const $iSpellIndex, Const $bDonateQueueOnly = False, Const 
 	; figure out row/position
 	If $Slot < 14 Or $Slot > 20 Then
 		SetLog("Invalid slot # found = " & $Slot & " for " & $g_asSpellNames[$iSpellIndex], $COLOR_ERROR)
+		$g_NoDonoSpells = True
 		Return
 	EndIf
 	$donaterow = 3 ;row of spells
@@ -995,6 +1000,7 @@ Func DonateSiegeType(Const $iSiegeIndex, $bDonateAll = False)
 	; figure out row/position
 	If $Slot < 0 Or $Slot > 13 Then
 		SetLog("Invalid slot # found = " & $Slot & " for " & $g_asSiegeMachineNames[$iSiegeIndex], $COLOR_ERROR)
+		$g_NoDonoSieges = True
 		Return
 	EndIf
 

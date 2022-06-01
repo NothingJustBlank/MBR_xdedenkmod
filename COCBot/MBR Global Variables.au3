@@ -1972,3 +1972,6 @@ Global $g_iRequestTime = 10 ;in minutes
 Global $g_LastCommonRoutine ;time to last common routine
 Global $g_DoCommonRoutine = False
 Global $g_SkipCommonRoutine = True
+Global $g_NoDonoTroops = False
+Global $g_NoDonoSpells = False
+Global $g_NoDonoSieges = False
