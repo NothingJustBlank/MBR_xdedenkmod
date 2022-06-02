@@ -1968,7 +1968,11 @@ Global $aCCBuildingIgnore[9] = ["Grove", "Tree", "Forest", "Campsite", "Stone Ci
 Global $g_bChkStartWeekendRaid = True
 
 ;xdedenkmod
+Global $g_LastLoginTime[16] ;timer for last login per account
 Global $g_iRequestTime = 10 ;in minutes
 Global $g_LastCommonRoutine ;time to last common routine
 Global $g_DoCommonRoutine = False
 Global $g_SkipCommonRoutine = True
+Global $g_NoDonoTroops = False
+Global $g_NoDonoSpells = False
+Global $g_NoDonoSieges = False

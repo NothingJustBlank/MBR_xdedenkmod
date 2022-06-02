@@ -84,6 +84,7 @@ Func InitiateSwitchAcc() ; Checking profiles setup in Mybot, First matching CoC 
 EndFunc   ;==>InitiateSwitchAcc
 
 Func CheckSwitchAcc()
+	Local $tmp_CurrAcc = $g_iCurAccount ;xdedenkmod
 	Local $abAccountNo = AccountNoActive()
 	If Not $g_bRunState Then Return
 	Local $aActiveAccount = _ArrayFindAll($abAccountNo, True)
@@ -228,10 +229,15 @@ Func CheckSwitchAcc()
 				If $g_bRequestTroopsEnable Then ;Editted for xdedenkmod
 					SetLog("Requesting CC Only", $COLOR_DEBUG)
 					RequestCC()
+					$g_LastLoginTime[$tmp_CurrAcc] = __TimerInit()
 					
 					If $g_abDonateOnly[$g_iCurAccount] Then
+						SetLog("Donate only mode!", $COLOR_INFO)
 						PrepareDonateCC()
 						DonateCC()
+						If _Sleep(500) Then Return
+						DonateCC() ;second time to go
+						
 						TrainSystem()
 					EndIf
 				EndIf
@@ -250,8 +256,6 @@ Func CheckSwitchAcc()
 EndFunc   ;==>CheckSwitchAcc
 
 Func SwitchCOCAcc($NextAccount)
-	Local $tmp_CurrAcc = $g_iCurAccount ;xdedenkmod
-
 	Local $abAccountNo = AccountNoActive()
 	If $NextAccount < 0 And $NextAccount > $g_iTotalAcc Then $NextAccount = _ArraySearch(True, $abAccountNo)
 	Static $iRetry = 0
@@ -371,16 +375,19 @@ Func SwitchCOCAcc($NextAccount)
 		EndIf
 		
 		;xdedenkmod - Delay for switch
-		If Not $g_ahTimerSinceSwitched[$NextAccount] = "" Then
-			Local $tmp_TimerDiff = _Timer_Diff($g_ahTimerSinceSwitched[$NextAccount])
-			If $tmp_TimerDiff >= ($g_iRequestTime * 60000) Then
-				SetLog("Switching to next account, last login is > " & $g_iRequestTime & " minutes!", $COLOR_SUCCESS)
+		If $g_LastLoginTime[$g_iCurAccount] <> "" Then
+			Local $tmp_TimerDiff = __TimerDiff($g_LastLoginTime[$g_iCurAccount])
+			SetLog("Last login time is " & Round($tmp_TimerDiff/60000, 2) & " mins!", $COLOR_INFO)
+			If $tmp_TimerDiff >= ($g_iRequestTime * 60000) Or $tmp_TimerDiff = 0 Then
+				SetLog("Continue switching to Account [" & $g_iCurAccount + 1 & "], last login is > " & $g_iRequestTime & " minutes!", $COLOR_SUCCESS)
 			Else
 				Local $Ran_Time = Random(1, 1.1)
-				Local $Ran_Wait = $Ran_Time * $tmp_TimerDiff
-				SetLog("Waiting for CC Request to be ready, Sleep for " & $Ran_Wait & "ms!", $COLOR_INFO)
-				If _Sleep($Ran_Wait) Then Return
+				Local $Ran_Wait = Round($Ran_Time * (600000 - $tmp_TimerDiff))
+				SetLog("Waiting for CC Request to be ready, Sleep for " & Round($Ran_Wait/60000, 2) & "mins!", $COLOR_INFO)
+				If _SleepStatus($Ran_Wait) Then Return
 			EndIf
+		Else
+			SetLog("First run, continue switching to Account [" & $g_iCurAccount + 1 & "]!", $COLOR_SUCCESS)
 		EndIf
 		
 		If $bSharedPrefs Then

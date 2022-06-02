@@ -89,6 +89,11 @@ Func SwitchAccountVariablesReload($sType = "Load", $iAccount = $g_iCurAccount)
 	;===========================================
 	$g_sPetUpgradeTime = ""
 	GUICtrlSetData($g_hLbLPetTime, "")
+	
+	; xdedenk - Reset Custom Dono Variables
+	$g_NoDonoTroops = False
+	$g_NoDonoSpells = False
+	$g_NoDonoSieges = False
 
 	; First time switch account
 	Switch $sType
