@@ -61,8 +61,11 @@ Func waitMainScreen() ;Waits for main screen to popup
 	SetLog("Wait MainScreen Timout", $COLOR_ERROR)
 	SetLog("=========RESTART COC==========", $COLOR_INFO)
 	SaveDebugImage("WaitMainScreenTimout", True)
-	CloseCoC() ;only close coc
+	
+	CloseCoC() ;restart coc
+	If _SleepStatus(180000) Then Return
 	_RestartAndroidCoC(False, False, True, 0, 0, True) ;start coc, not updating shared_prefs
+	
 	_SleepStatus(10000) ;give time for coc loading
 	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 EndFunc   ;==>waitMainScreen
