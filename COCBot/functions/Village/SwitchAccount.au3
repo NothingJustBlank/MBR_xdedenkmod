@@ -239,6 +239,21 @@ Func CheckSwitchAcc()
 						DonateCC() ;second time to go
 						
 						TrainSystem()
+						VillageReport()
+						
+						;Auto Stop Bot if Elix < 200k
+						If $g_aiCurrentLoot[$eLootElixir] < 200000 Then
+							SetLog("Elixir below 200k, automatically stopping bot", $COLOR_ERROR)
+							CloseCoC()
+							BotStop()
+						EndIf
+						
+						;Auto Stop Bot if DE < 30k
+						If $g_aiCurrentLoot[$eLootDarkElixir] < 30000 Then
+							SetLog("Dark Elixir below 30k, automatically stopping bot", $COLOR_ERROR)
+							CloseCoC()
+							BotStop()
+						EndIf
 					EndIf
 				EndIf
 			EndIf
