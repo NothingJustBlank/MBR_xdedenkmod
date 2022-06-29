@@ -248,6 +248,7 @@ Func DonateCC($bCheckForNewMsg = False)
 		If _Sleep($DELAYDONATECC2) Then Return
 	EndIf
 	
+	#cs
 	;Scroll UP
 	While WaitforPixel(299, 93, 300, 94, "5DA515", 6, 2)
 		Click(295, 88, 1, 0, "#0172")
@@ -255,6 +256,7 @@ Func DonateCC($bCheckForNewMsg = False)
 		_Sleep(1200)
 		$bDonate = True
 	Wend
+	#ce
 	
 	If $g_iCommandStop <> 0 And $g_iCommandStop <> 3 Then SetLog("Checking for Donate Requests in Clan Chat", $COLOR_INFO)
 
@@ -430,7 +432,7 @@ Func DonateCC($bCheckForNewMsg = False)
 			EndIf
 
 			;;; Flagged to Skip Check
-			If $g_bSkipDonTroops And $g_bSkipDonSpells And $g_bSkipDonSiege Then
+			If ($g_iTotalDonateTroopCapacity < 5) Or ($g_bSkipDonTroops And $g_bSkipDonSpells And $g_bSkipDonSiege) Then
 				$bDonate = True
 				$aiSearchArray[1] += 50
 				ContinueLoop ; go to next button if cant read Castle Troops and Spells before the donate window opens
@@ -661,6 +663,7 @@ Func DonateCC($bCheckForNewMsg = False)
 			$bDonate = False
 		EndIf
 
+		#cs
 		;;; Scroll Down
 		Local $iCount = 0
 		While WaitforPixel(292, 610, 293, 611, "5DA515", 6, 2)
@@ -676,6 +679,7 @@ Func DonateCC($bCheckForNewMsg = False)
 			Click(22, 610, 1, 0, "#0172")
 			SetDebugLog("Click Green Left Chat Button", $COLOR_ACTION)
 		EndIf
+		#ce
 		
 		If $bDonate Then 
 			$aiSearchArray = $aiSearchArrayBackUp
@@ -1162,7 +1166,7 @@ EndFunc   ;==>DonateWindowCap
 Func RemainingCCcapacity($aiDonateButton)
 	; Remaining CC capacity of requested troops from your ClanMates
 	; Will return the $g_iTotalDonateTroopCapacity with that capacity for use in donation logic.
-
+	
 	Local $sCapTroops = "", $aTempCapTroops, $sCapSpells = "", $aTempCapSpells, $sCapSiegeMachine = "", $aTempCapSiegeMachine
 	Local $iDonatedTroops = 0, $iDonatedSpells = 0, $iDonatedSiegeMachine = 0
 	Local $iCapTroopsTotal = 0, $iCapSpellsTotal = 0, $iCapSiegeMachineTotal = 0
