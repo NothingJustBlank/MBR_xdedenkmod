@@ -1455,6 +1455,7 @@ Func ValidateSearchArmyResult($aSearchResult, $iIndex = 0)
 EndFunc   ;==>ValidateSearchArmyResult
 
 Func CheckValuesCost($Troop = "Arch", $troopQuantity = 1)
+	Return True
 	; Local Variables
 	Local $nElixirCurrent = 0, $nDarkCurrent = 0
 
