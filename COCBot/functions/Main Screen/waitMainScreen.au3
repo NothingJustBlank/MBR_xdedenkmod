@@ -18,7 +18,7 @@ Func waitMainScreen() ;Waits for main screen to popup
 	Local $iCount
 	SetLog("Waiting for Main Screen")
 	$iCount = 1
-	For $i = 0 To 10 ;11*2000 = 22 seconds (for blackscreen) and plus loading screen
+	For $i = 0 To 30 ;31*2000 = 62 seconds (for blackscreen) and plus loading screen
 		If Not $g_bRunState Then Return
 		SetDebugLog("waitMainScreen ChkObstl Loop = " & $i & ", ExitLoop = " & $iCount, $COLOR_DEBUG) ; Debug stuck loop
 		$iCount += 1
@@ -54,20 +54,26 @@ Func waitMainScreen() ;Waits for main screen to popup
 			Return
 		EndIf
 		
-		If Not checkObstacles() And $i = 10 Then ExitLoop ;something wrong with coc screen exit this loop and try to restart coc
+		If Not checkObstacles() Then
+			If Mod($i, 10) = 1 Then
+				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+				SetLog("Wait MainScreen Timout", $COLOR_ERROR)
+				SetLog("=========RESTART COC==========", $COLOR_INFO)
+				SaveDebugImage("WaitMainScreenTimout", True)
+				
+				CloseCoC() ;restart coc
+				If _SleepStatus(180000) Then Return
+				_RestartAndroidCoC(False, False, True, 0, 0, True) ;start coc, not updating shared_prefs
+				
+				_SleepStatus(10000) ;give time for coc loading
+				;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+			ElseIf $i = 30 Then
+				ExitLoop ;something wrong with coc screen exit this loop and try to restart coc
+			EndIf
+		Else
+			SetLog("checkObs Found!")
+		EndIf
 	Next
-
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	SetLog("Wait MainScreen Timout", $COLOR_ERROR)
-	SetLog("=========RESTART COC==========", $COLOR_INFO)
-	SaveDebugImage("WaitMainScreenTimout", True)
-	
-	CloseCoC() ;restart coc
-	If _SleepStatus(180000) Then Return
-	_RestartAndroidCoC(False, False, True, 0, 0, True) ;start coc, not updating shared_prefs
-	
-	_SleepStatus(10000) ;give time for coc loading
-	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 EndFunc   ;==>waitMainScreen
 
 Func waitMainScreenMini()
