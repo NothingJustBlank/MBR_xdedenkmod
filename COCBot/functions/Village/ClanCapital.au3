@@ -4,13 +4,13 @@ Func CollectCCGold($bTest = False)
 	Local $bWindowOpened = False
 	Local $aCollect, $iBuilderToUse = $g_iCmbForgeBuilder + 1
 	SetLog("Start Collecting Clan Capital Gold", $COLOR_INFO)
-	ClickAway()
-	ZoomOut() ;ZoomOut first
+	ClickAway("Right")
+	ZoomOut(True) ;ZoomOut first
 	If QuickMIS("BC1", $g_sImgCCGoldCollect, 250, 550, 400, 670) Then
 		Click($g_iQuickMISX, $g_iQuickMISY + 20)
 		For $i = 1 To 5
 			SetDebugLog("Waiting for Forge Window #" & $i, $COLOR_ACTION)
-			If QuickMis("BC1", $g_sImgGeneralCloseButton, 710, 150, 760, 190) Then
+			If QuickMis("BC1", $g_sImgGeneralCloseButton, 710, 160, 760, 205) Then
 				$bWindowOpened = True
 				ExitLoop
 			EndIf
@@ -56,7 +56,7 @@ Func CollectCCGold($bTest = False)
 		SetLog("No available Clan Capital Gold to be collected!", $COLOR_INFO)
 		Return
 	EndIf
-	ClickAway()
+	ClickAway("Right")
 	If _Sleep(500) Then Return
 EndFunc
 
