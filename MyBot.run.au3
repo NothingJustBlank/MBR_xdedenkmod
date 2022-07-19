@@ -727,7 +727,7 @@ Func runBot() ;Bot that runs everything in order
 		SwitchCoCAcc($g_iNextAccount)
 	EndIf
 
-	Collect(False)
+	CollectCCGold()
 
 	;Common Routine Reset
 	If Not $g_SkipCommonRoutine Then
