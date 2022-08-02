@@ -232,9 +232,10 @@ Func CheckSwitchAcc()
 					$g_LastLoginTime[$tmp_CurrAcc] = __TimerInit()
 					
 					If $g_abDonateOnly[$g_iCurAccount] Then
+						$g_aiCurrentSiegeMachines[$eSiegeWallWrecker] = 3 ; force
 						SetLog("Donate only mode!", $COLOR_INFO)
 						PrepareDonateCC()
-						DonateCC()
+						DonateCC(False, "Up")
 						If _Sleep(500) Then Return
 						DonateCC() ;second time to go
 						

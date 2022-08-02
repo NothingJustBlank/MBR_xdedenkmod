@@ -165,7 +165,7 @@ Func getArmyRequest($aiDonateCoords, $bNeedCapture = True)
 	Return StringTrimLeft($sClanText, 2)
 EndFunc   ;==>getArmyRequest
 
-Func DonateCC($bCheckForNewMsg = False)
+Func DonateCC($bCheckForNewMsg = False, $bScroll = "")
 
 	Local $bDonateTroop = ($g_aiPrepDon[0] = 1)
 	Local $bDonateAllTroop = ($g_aiPrepDon[1] = 1)
@@ -248,15 +248,17 @@ Func DonateCC($bCheckForNewMsg = False)
 		If _Sleep($DELAYDONATECC2) Then Return
 	EndIf
 	
-	#cs
-	;Scroll UP
-	While WaitforPixel(299, 93, 300, 94, "5DA515", 6, 2)
-		Click(295, 88, 1, 0, "#0172")
-		SetDebugLog("Click Green Scroll Button", $COLOR_ACTION)
-		_Sleep(1200)
-		$bDonate = True
-	Wend
-	#ce
+	;Scroll UP 3 TIMES
+	If $bScroll = "Up" Then
+		For $i = 1 to 3
+			If WaitforPixel(299, 93, 300, 94, "5DA515", 6, 2) Then
+				Click(295, 88, 1, 0, "#0172")
+				SetDebugLog("Click Green Scroll Button", $COLOR_ACTION)
+				_Sleep(1200)
+				;$bDonate = True
+			EndIf
+		Next
+	EndIf
 	
 	If $g_iCommandStop <> 0 And $g_iCommandStop <> 3 Then SetLog("Checking for Donate Requests in Clan Chat", $COLOR_INFO)
 
@@ -405,6 +407,7 @@ Func DonateCC($bCheckForNewMsg = False)
 			ElseIf $g_NoDonoTroops Then
 				SetLog("No available troops!", $COLOR_ACTION)
 				$g_bSkipDonTroops = True
+				$g_bSkipDonSpells = True
 			EndIf
 			If ($g_iCurrentSpells = 0 And $g_iCurrentSpells <> "") Or $g_NoDonoSpells Then
 				SetLog("No spells available, skip spell donation...", $COLOR_ORANGE)
@@ -632,6 +635,7 @@ Func DonateCC($bCheckForNewMsg = False)
 						If $g_abChkDonateAllTroop[$Index] Then
 							If CheckDonateSiege($SiegeIndex, $g_asTxtDonateTroop[$Index], $g_asTxtBlacklistTroop[$Index], $ClanString, $bNewSystemToDonate) Then
 								DonateSiegeType($SiegeIndex, True)
+								$g_aiCurrentSiegeMachines[$eSiegeWallWrecker] -= 1 ; Force no siege
 							EndIf
 							ExitLoop
 						EndIf
@@ -663,18 +667,22 @@ Func DonateCC($bCheckForNewMsg = False)
 			$bDonate = False
 		EndIf
 
-		#cs
+		
 		;;; Scroll Down
 		Local $iCount = 0
-		While WaitforPixel(292, 610, 293, 611, "5DA515", 6, 2)
-			$iCount += 1
-			Click(295, 600, 1, 0, "#0172")
-			SetDebugLog("Click Green Scroll Button", $COLOR_ACTION)
-			If _Sleep(1000) Then Return
-			$bDonate = True
-			If $iCount > 4 Then ExitLoop
-		Wend
+		If $bScroll <> "Up" Then
+			If WaitforPixel(292, 610, 293, 611, "5DA515", 6, 2) Then
+				;$iCount += 1
+				;Click(295, 600, 1, 0, "#0172")
+				Click(22, 610, 1, 0, "#0172") ;Click Left Button
+				SetDebugLog("Click Green Scroll Button", $COLOR_ACTION)
+				If _Sleep(1000) Then Return
+				$bDonate = True
+				;If $iCount > 4 Then ExitLoop
+			EndIf
+		EndIf
 		
+		#cs
 		If $iCount < 5 And WaitforPixel(22, 608, 23, 609, "FFFFFF", 6, 1) Then
 			Click(22, 610, 1, 0, "#0172")
 			SetDebugLog("Click Green Left Chat Button", $COLOR_ACTION)
@@ -1003,6 +1011,7 @@ Func DonateSiegeType(Const $iSiegeIndex, $bDonateAll = False)
 	$Slot = DetectSlotSiege($iSiegeIndex)
 	If $Slot = -1 Then
 		SetLog("No " & $g_asSiegeMachineNames[$iSiegeIndex] & " available to donate..", $COLOR_ERROR)
+		$g_aiCurrentSiegeMachines[$g_asSiegeMachineNames[$iSiegeIndex]] = 0; Force ZERO
 		Return
 	EndIf
 
